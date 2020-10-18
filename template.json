@@ -1,0 +1,2 @@
+template='[[["B","=","Tok",":","S"],"Může zde být /cos x"],[["Fm","=","I","*","závity"]],[["Um","=","H","*","l"]],[["H","=","Fm",":","l"]],[["permeabilita","=","B",":","H"]],[["vodivost","=","permeabilita","*","S",":","l"]],[["odpor","= 1 :","vodivost"]]]'
+replace='{"Tok":"Φ"}'
