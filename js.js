@@ -8,7 +8,9 @@ for(let i of template){
 		if(typeof z == "object"){
 			equation[equation.length]=[]
 			for(let y=0;y<=z.length;y+=2){
-				equation[equation.length-1][equation[equation.length-1].length]=z[y]
+				if(!equation[equation.length-1].includes(z[y])){
+					equation[equation.length-1][equation[equation.length-1].length]=z[y]
+				}
 				if(!sign.includes(z[y])){
 					sign[sign.length]=z[y]
 				}
