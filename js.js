@@ -1,4 +1,5 @@
 template=JSON.parse(template)
+toreplace=JSON.parse(toreplace)
 sign=[]
 equation=[]
 let toprint=""
@@ -46,14 +47,19 @@ function update(have,need,calculated,round){
 	change=false
 	for(i of equation){
 		x=[]
+		round=0
 		for(y of i){
 			if(!have.includes(y) && typeof calculated[y] == "undefined"){
 				x[x.length]=y
+				if(typeof calculated[y] != "undefined" ){
+					if(calculated[y][1]>round){
+						round=calculated[y][1]+1
+					}
+				}
 			}
 		}
 		if(x.length==1){
 			calculated[x[0]]=[x[0],round,i]
-			round++
 			change=true
 		}
 	}
@@ -98,15 +104,21 @@ function get_way(x,have,calculated){
 		trtoprint=document.createElement("tr");
 		let tdtoprint=document.createElement("td");
 		tdtoprint.appendChild(document.createTextNode(template[equation.indexOf(calculated[x][2])][0].join(" ")))
-		tdtoprint.colSpan="20"
+		tdtoprint.colSpan="200"
 		trtoprint.appendChild(tdtoprint)
 		toprint.appendChild(trtoprint);
 		trtoprint=document.createElement("tr");
 		tdtoprint=document.createElement("td");
 		tdtoprint.appendChild(document.createTextNode(x))
-		tdtoprint.colSpan="20"
+		tdtoprint.colSpan="200"
 		trtoprint.appendChild(tdtoprint)
 		toprint.appendChild(trtoprint);
 		return toprint
 	}
+}
+function repAll(txt){
+	for(o in toreplace){
+		txt=txt.replaceAll(o,toreplace[o])
+	}
+	return txt
 }
