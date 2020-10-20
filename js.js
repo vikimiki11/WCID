@@ -49,7 +49,7 @@ function update(have,need,calculated,round){
 		x=[]
 		round=0
 		for(y of i){
-			if(!have.includes(y) && typeof calculated[y] == "undefined"){
+			if(!have.includes(y) && typeof calculated[y] == "undefined" && !x.includes(y)){
 				x[x.length]=y
 				if(typeof calculated[y] != "undefined" ){
 					if(calculated[y][1]>round){
