@@ -1,5 +1,3 @@
-template=JSON.parse(template)
-toreplace=JSON.parse(toreplace)
 sign=[]
 equation=[]
 let toprint=""
@@ -59,7 +57,7 @@ function update(have,need,calculated,round){
 			if(!have.includes(y) && typeof calculated[y] == "undefined" && !x.includes(y)){
 				x[x.length]=y
 				if(typeof calculated[y] != "undefined" ){
-					if(calculated[y][1]>round){
+					if(calculated[y][1]>=round){
 						round=calculated[y][1]+1
 					}
 				}
