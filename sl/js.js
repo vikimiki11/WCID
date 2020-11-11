@@ -48,7 +48,7 @@ function changeinput(){
 	}
 	update(have,need,{},0)
 }
-function update(have,need,calculated,round){
+function update(have,need,calculated){
 	change=false
 	for(i of equation){
 		x=[]
@@ -56,6 +56,7 @@ function update(have,need,calculated,round){
 		for(y of i){
 			if(!have.includes(y) && typeof calculated[y] == "undefined" && !x.includes(y)){
 				x[x.length]=y
+			}else{
 				if(typeof calculated[y] != "undefined" ){
 					if(calculated[y][1]>=round){
 						round=calculated[y][1]+1
@@ -69,16 +70,22 @@ function update(have,need,calculated,round){
 		}
 	}
 	if(change){
-		update(have,need,calculated,round)
+		update(have,need,calculated)
 	}else{
-		write(have,need,calculated,round)
+		write(have,need,calculated)
 	}
 }
-function write(have,need,calculated,round){
+function write(have,need,calculated){
 	toprint="."+have.join(",.")+"{color:rgb(0,255,0);text-decoration: underline;}\n"
+	maxround=0
 	for(i in calculated){
-		color=256*(calculated[i][1]+1)/(round+1)
-		toprint+="."+i+"{color:rgb(0,"+(256-color)+","+color+")}\n"
+		if(calculated[i][1]>maxround){
+			maxround=calculated[i][1]
+		}
+	}
+	for(i in calculated){
+		color=256*(calculated[i][1]+1)/(maxround+1)
+		toprint+="."+i+"{color:rgb("+color/2+","+(256-color)+","+color+")}\n"
 	}
 	document.querySelector("#change").innerHTML=toprint
 	document.querySelector("#steps").innerHTML=""
